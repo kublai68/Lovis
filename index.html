@@ -9,47 +9,74 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
-    }
-
-    .background-video {
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      min-width: 100%;
-      min-height: 100%;
-      z-index: -1;
-      object-fit: cover;
-    }
-
-    .content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      color: white;
-      padding: 20px;
       font-family: sans-serif;
+    }
+
+    video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-shadow: 0 0 10px black;
+      padding: 20px;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+    }
+
+    button:hover {
+      background: rgba(255, 255, 255, 0.4);
     }
   </style>
 </head>
 <body>
 
-  <!-- Waterfall Video Background -->
-  <video class="background-video" autoplay muted loop playsinline>
+  <!-- Waterfall Background Video -->
+  <video id="bg-video" autoplay muted loop playsinline>
     <source src="waterfall.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+    Your browser does not support HTML5 video.
   </video>
 
-  <!-- Waterfall Sound -->
-  <audio autoplay loop controls>
+  <!-- Audio Element (Waterfall Sound) -->
+  <audio id="waterfall-sound" loop>
     <source src="waterfall-24060.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
-  <!-- Optional Content -->
-  <div class="content">
-    <h1>For Ms Lovis, relax by the Waterfall</h1>
-    <p>Enjoy the calming sound and motion.</p>
+  <!-- Overlay Content -->
+  <div class="overlay">
+    <h1>Welcome to Lovis Waterfall</h1>
+    <p>Relax with the soothing sights and sounds of nature.</p>
+    <button onclick="startSound()">Enable Sound</button>
   </div>
+
+  <!-- Script to Play Audio After User Interaction -->
+  <script>
+    function startSound() {
+      const audio = document.getElementById("waterfall-sound");
+      audio.play().catch(err => {
+        console.error("Audio playback failed:", err);
+      });
+    }
+  </script>
 
 </body>
 </html>
